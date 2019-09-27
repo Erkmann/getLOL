@@ -19,8 +19,8 @@ class MatchList:
         retorno = requests.get(url)
         if retorno.status_code == 200:
             resultado = retorno.json()
-            partida = Match(self.conexao)
             for p in resultado['matches']:
+                partida = Match(self.conexao)
                 p = partida.getMatchById(str(p['gameId']))
                 self.partidas.append(p)
 

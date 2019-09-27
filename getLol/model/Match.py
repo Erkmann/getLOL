@@ -1,6 +1,7 @@
 import requests
 
-from . import Summoner
+from getLol.model.Player import Player
+from getLol.model.ParticipantIdentity import ParticipantIdentity
 
 
 class Match:
@@ -33,7 +34,22 @@ class Match:
             self.season = resultado['seasonId']
             self.queue = resultado['queueId']
             self.id = resultado['gameId']
-            self.identidadeParticipantes = resultado['participantIdentities']
+            identidadeParts = []
+
+            for part in resultado['participantIdentities']:
+                player = Player(
+                                part['player']['currentPlatformId'],
+                                part['player']['summonerName'],
+                                part['player']['matchHistoryUri'],
+                                part['player']['platformId'],
+                                part['player']['currentAccountId'],
+                                part['player']['profileIcon'],
+                                part['player']['summonerId'],
+                                part['player']['accountId']
+                                )
+                participant_identity = ParticipantIdentity(player, part['participantId'])
+                identidadeParts.append(participant_identity)
+            self.identidadeParticipantes = identidadeParts
             self.versao_jogo = resultado['gameVersion']
             self.id_plataforma = resultado['platformId']
             self.modo_jogo = resultado['gameMode']
