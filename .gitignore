@@ -72,3 +72,6 @@ venv.bak/
 
 #VSCode
 .vscode/
+
+#Pycharm
+.idea/
