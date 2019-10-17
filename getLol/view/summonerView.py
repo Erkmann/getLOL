@@ -11,18 +11,17 @@ class getSummoner:
     def getAllSummoner(self):
         sum = Summoner(self.conexao)
         summoner = sum.getSummonerByName(self.nome, self.regiao)
-        print(summoner.id_conta)
         match_list = MatchList(self.conexao)
         summoner.partidas = match_list.getMatchListByAccount(summoner, self.regiao).partidas
 
         return summoner
 
-# con = Conexao('RGAPI-4695ca5c-0e1b-43ee-a55b-a673dda3a044')
-# sum = getSummoner(con, 'Rus5o')
-# summoner = sum.getAllSummoner()
-#
-#
-# for p in summoner.partidas:
-#     for a in p.identidadeParticipantes:
-#         print(a.player.nome)
-#     print('\n')
+con = Conexao('RGAPI-3165e59d-446a-485d-8a2b-8f5774a4c0b6')
+sum = getSummoner(con, 'Rus5o')
+summoner = sum.getAllSummoner()
+
+
+for p in summoner.partidas:
+    for a in p.identidadeParticipantes:
+        print(a.player.nome)
+    print('\n')

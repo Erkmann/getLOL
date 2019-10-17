@@ -1,7 +1,11 @@
+from pprint import pprint
+
 import requests
 
 from getLol.model.Player import Player
 from getLol.model.ParticipantIdentity import ParticipantIdentity
+from getLol.model.Ban import Ban
+from getLol.model.Equipe import Equipe
 
 
 class Match:
@@ -55,7 +59,21 @@ class Match:
             self.modo_jogo = resultado['gameMode']
             self.id_mapa = resultado['mapId']
             self.tipo_jogo = resultado['gameType']
-            self.equipes = resultado['teams']
+
+            equipes = []
+            for equipe in resultado['teams']:
+                bans = []
+                for ban in equipe['bans']:
+                    ban_o = Ban(ban['pickTurn'], ban['championId'])
+                    bans.append(ban_o)
+                eq = Equipe(equipe['firstDragon'], equipe['firstInhibitor'], bans, equipe['baronKills'],
+                            equipe['firstRiftHerald'], equipe['firstBaron'], equipe['riftHeraldKills'],
+                            equipe['firstBlood'], int(equipe['teamId']), equipe['firstTower'],
+                            equipe['vilemawKills'], equipe['inhibitorKills'], equipe['towerKills'],
+                            equipe['dominionVictoryScore'], equipe['win'], equipe['dragonKills'])
+                equipes.append(eq)
+
+            self.equipes = equipes
             self.participantes = resultado['participants']
             self.duracao = resultado['gameDuration']
             self.criacao = resultado['gameCreation']
