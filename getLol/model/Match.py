@@ -74,6 +74,7 @@ class Match:
                 equipes.append(eq)
 
             self.equipes = equipes
+
             self.participantes = resultado['participants']
             self.duracao = resultado['gameDuration']
             self.criacao = resultado['gameCreation']

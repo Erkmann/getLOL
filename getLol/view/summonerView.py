@@ -16,12 +16,12 @@ class getSummoner:
 
         return summoner
 
-con = Conexao('RGAPI-3165e59d-446a-485d-8a2b-8f5774a4c0b6')
+con = Conexao('RGAPI-57234896-991f-4f7e-b7b4-1aa7a0edec0c')
 sum = getSummoner(con, 'Rus5o')
 summoner = sum.getAllSummoner()
 
 
-for p in summoner.partidas:
-    for a in p.identidadeParticipantes:
-        print(a.player.nome)
-    print('\n')
+# for p in summoner.partidas:
+#     for a in p.identidadeParticipantes:
+#         print(a.player.nome)
+#     print('\n')
